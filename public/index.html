@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Login Page</title>
+<style>
+    h1,p{
+        color:"blue";
+        font-family:"Comic Sans MS";
+    }
+    .button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 15px 32px;
+        text-align: center;
+        font-family:"Comic Sans MS";
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        background-color:#008CBA;
+		width: 30%;
+    }
+
+	input[type=text],[type=password] {
+        width: 30%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        display: inline-block;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+    }
+</style>
+<link rel="manifest" href="manifest.json">
+<body>
+<form action="/login" method="post">
+<div style="margin-top:150px; text-align: center;">
+<h1>
+Login</h1><br><br>
+<input type="text" placeholder="Enter Username" name="username" id="username"/><br>
+<input type="password" placeholder="Enter Password" name="password" id="password"/><br><br>
+<input type="submit" value="Login" class="button"/>
+</div>
+</form>
+<script>
+    if('serviceWorker' in navigator){
+        window.addEventListener('load',()=>{
+            navigator.serviceWorker.register('sw.js')
+        .then(registration =>{
+            console.log('service worker is registered',registration);
+        })
+        .catch(err =>{
+            console.log('Registration failed',err);
+        })
+        })
+    }
+</script>
+<script src="main.js"></script>
+
+</body>
+</html>

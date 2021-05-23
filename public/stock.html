@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <style>
+            th{
+                background-color:rgb(175, 132, 132);
+            }
+            
+        </style>
+    </head>
+    <body>
+        <center>
+            
+        <h1>Simple Balance Sheet Statement</h1>
+        
+            <table id="tbl" border=2>
+                <tr>
+                    <th style="width: 90px">Date</th>
+                    <th style="width: 180px">Receivables</th>
+                    <th style="width: 180px">Total current liabilities</th>
+                    <th style="width: 180px">Other comprehensive income</th>
+                    <th style="width: 180px">Net Debt</th>
+                    <th style="width: 180px">Total shareholders equity</th>
+                    <th style="width: 180px">Payables</th>
+                    <th style="width: 180px">Short-term debt</th>
+                    
+                </tr>
+            </table>
+            
+        </center>
+    </body>
+    <script>
+        window.addEventListener('DOMContentLoaded',(event) => {
+            fetch("https://financialmodelingprep.com/api/v3/financials/balance-sheet-statement/AAPL?period=quarter&apikey=demo")
+
+            .then(response => response.json())
+            .then(data => {
+                var dat =JSON.stringify(data);
+                dat1=data['financials'];
+
+                var bod =document.getElementById("body");
+
+                var tb=document.getElementById("tbl");
+
+                for(let i=0;i<dat1.length;i++)
+                {
+                    var tr =document.createElement('tr');
+                    var td=document.createElement('td');
+
+                    td.innerHTML=dat1[i].date;
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td=document.createElement('td');
+                    td.innerHTML=dat1[i].Receivables;
+                   
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td=document.createElement('td');
+                    td.innerHTML=dat1[i]["Total current liabilities"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td=document.createElement('td');
+                    td.innerHTML=dat1[i]["Other comprehensive income"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td=document.createElement('td');
+                    td.innerHTML=dat1[i]["Net Debt"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td=document.createElement('td');
+                    td.innerHTML=dat1[i]["Total shareholders equity"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td=document.createElement('td');
+                    td.innerHTML=dat1[i].Payables;
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+
+                    var td=document.createElement('td');
+                    td.innerHTML=dat1[i]["Short-term debt"];
+                    tr.appendChild(td);
+                    tb.appendChild(tr);
+                }
+            })
+            .catch(error => console.log('error',error));
+        });
+    </script>
+</html>

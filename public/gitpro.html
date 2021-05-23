@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        
+            <style>
+               table, th, td {
+                    border: 1px solid black;
+                    border-collapse: collapse;
+                    }
+                th, td {
+                padding: 15px;
+                     }
+                tr:nth-child(even) {
+                    background-color: #eee;
+                    }
+                tr:nth-child(odd) {
+                    background-color: #fff;
+                    }
+                th {
+                    color: white;
+                    background-color: black;
+                    }
+                
+                img {
+                    border-radius: 50%;
+                    }
+                    </style>
+                    <style>
+                .mainBlock{
+                    margin:100px;
+                    width: 60vw;
+                    display: flex;
+                    height: 55vh;
+                    border-radius:30px;
+                    }
+                .one{
+                    flex:0.3;
+                    background-color:#132566;
+                    border-top-left-radius: 20px;
+                    border-bottom-left-radius: 20px;
+                    align-items:flex-end;   
+                    justify-content: space-around;
+                }
+                
+                .two{
+                    flex:0.7;   
+                    background-color:#9c578d;
+                    border-top-right-radius: 20px;
+                    border-bottom-right-radius: 20px;
+                }
+                p{
+                    color:black;
+                    font-size: 24px;
+                    font-weight: 600;
+                }
+                hr{
+                    margin:0px; 
+                }
+                .infoOne{
+                    display: flex;
+                }
+                .infoOneA{
+                    flex:0.5;
+                    align-items: center;
+                }
+                .infoOneB{
+                    flex:0.5;
+                    align-items: center;
+                } 
+                a{
+                    text-decoration: none;
+                    color:rgb(88, 83, 83);
+                }  
+                .more{
+                    display:flex;
+                    margin-left:300px;
+                }
+
+    </style>    
+
+
+
+            </style>
+    </head>
+    <link rel="manifest" href="manifest.json">
+    <body style="background-color:rgb(163, 155, 156);">
+        <center><h1>Github Profile</h1>
+        <input class="w3-input" type="text" id="text_input" ><br>
+        <center>
+        <input type="button" class="w3-button w3-black" onclick="gitdata()" value="Get Profile">
+        
+        <div id='git_image'>
+            <img src="" alt="profile image" id="image">
+            <p id='para'></p>
+        <table border="6">
+            <tr>
+            <td>Name </td> <td><p id='demo'></p></td>
+            </tr>
+            <tr>
+                <td>Node_id </td> <td><p id='demo6'></p></td>
+                </tr>
+            
+
+            <tr>
+            <td>Followers </td><td><p id='demo1'></p></td>
+            <tr>
+            <td>Following </td><td> <p id='demo2'></p></td>
+            </tr>
+            <tr>
+                <td>ID </td><td> <p id='demo3'></p></td>
+                </tr>
+                <tr>
+                    <td>Location </td><td> <p  id='demo4'></p></td>
+                    </tr>
+                    <tr>
+                        <td>html_url </td><td> <p id='demo7'></p></td>
+                        </tr>
+                    <tr>
+                        <td>Avatar URL </td><td> <p id='demo5'></p></td>
+                        </tr>
+                        <tr>
+                            <td>Followers URL </td><td> <p id='demo8'></p></td>
+                            </tr>
+                            <tr>
+                                <td>Following URL </td><td> <p id='demo9'></p></td>
+                                </tr>
+                                <tr> 
+                                    <td>Subscriptions URL </td><td> <p id='demo10'></p></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Organizations URL </td><td> <p id='demo11'></p></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Repository URL </td><td> <p id='demo12'></p></td>
+                                            </tr>
+                                            <tr>
+                                            <td>Gists URL </td><td> <p id='demo13'></p></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Starred URL </td><td> <p id='demo14'></p></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Events URL </td><td> <p id='demo15'></p></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Received Events URL </td><td> <p id='demo16'></p></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Type </td><td> <p id='demo17'></p></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>Site Admin</td><td> <p id='demo18'></p></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td>Company </td><td> <p id='demo19'></p></td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>hireable </td><td> <p id='demo20'></p></td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td>Public Repository </td><td> <p id='demo22'></p></td>
+                                                                            </tr>
+                                                                        
+                                                                        <tr>
+                                                                            <td>Created On </td><td> <p id='demo21'></p></td>
+                                                                            </tr>
+                                                                            
+
+    
+
+        </table>
+
+        </table>
+        </div>
+    </center>
+    </body>
+<script>
+    function gitdata(){
+
+    var url='https://api.github.com/users/'+document.getElementById('text_input').value;
+
+    fetch(url)
+    .then(response => response.json())
+    .then(data => {
+        console.log(data.avatar_url)
+        var im = document.getElementById("image");
+        im.setAttribute("src",data.avatar_url);
+        
+        
+        document.getElementById("demo").innerHTML = data.login;
+        document.getElementById("demo1").innerHTML = data.followers;
+        document.getElementById("demo2").innerHTML = data.following;
+        document.getElementById("demo3").innerHTML = data.id;
+        document.getElementById("demo4").innerHTML = data.location;
+        document.getElementById("demo5").innerHTML = data.avatar_url;
+        document.getElementById("demo6").innerHTML = data.node_id;
+        document.getElementById("demo7").innerHTML=data.html_url;
+        document.getElementById("demo8").innerHTML=data.followers_url;
+        document.getElementById("demo9").innerHTML=data.following_url;
+        document.getElementById("demo10").innerHTML=data.subscriptions_url;
+        document.getElementById("demo11").innerHTML=data.organizations_url;
+        document.getElementById("demo12").innerHTML=data.repos_url;
+        document.getElementById("demo13").innerHTML=data.gists_url;
+        document.getElementById("demo14").innerHTML=data.starred_url;
+        document.getElementById("demo15").innerHTML=data.events_url;
+        document.getElementById("demo16").innerHTML=data.received_events_url;
+        document.getElementById("demo17").innerHTML=data.type;
+        document.getElementById("demo18").innerHTML=data.site_admin;
+        document.getElementById("demo19").innerHTML=data.company;
+        document.getElementById("demo20").innerHTML=data.hireable;
+        document.getElementById("demo21").innerHTML=data.created_at;
+
+        document.getElementById("demo22").innerHTML=data.public_repos;
+
+        
+        
+        
+
+    })
+
+    .catch(function(response){
+        return response.status;
+        console.log(response.status);
+    });;
+    
+}
+</script>
+</html>
